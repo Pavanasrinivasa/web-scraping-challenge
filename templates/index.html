@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content ="width=device-width", initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    
+</head>
+<body class="text-white" style="background-color: black;"></body>
+    <!-- <div style="background-color:brown;"></div> -->
+    <div class="container">
+        <div class="jumbotron text-center" style="background-image: url(https://img2.goodfon.com/wallpaper/nbig/6/ee/planeta-mars-krasnaya-chernyy.jpg); background-size: cover; background-position: center;">
+        <!-- <div class="jumbotron text-center" style="background-color: black;"></div> -->
+          <h1 class="display-4" style="color:cornsilk">Mission to Mars</h1>
+          <p><a class="btn btn-primary btn-lg" style="background-color:darkred" href="/scrape" role="button;">Scrape New Data</a></p>
+        </div>
+    
+        <div class="row" id="mars-news">
+          <div class="col-md-12">
+              <h3 style="color: brown;">Latest Mars News</h3>
+                <h4 style="color:blanchedalmond">{{mars.news_title}}</h4>
+                    <p style="color:blanchedalmond">{{mars.news_paragraph}}</p>
+          </div>
+        </div>
+        <div class ="row" id="mars-image">
+            <div class = "col-md-8">
+                <h3 style="color: brown;"> JPL Featured Mars Image</h3>
+                <img src = "{{mars.featured_img_url}}" alt ="Mars Image">
+            </div>
+            <div class = "col-md-4">
+                    <h4 style="color: brown;">Current Weather on Mars</h4>
+                    <p style="color:blanchedalmond">{{mars.mars_weather}}</p>
+                    <br>
+
+                    <div class="col-lg-6 col-sm-12; color:blanchedalmond"></div>
+                    <h4 style="color:brown">Mars Facts</h4>
+                    <table class="table table-dark table-hover"></table>
+                    {{mars.mars_facts | safe}}
+                </div>
+        </div>
+        
+        <div class ="row">
+                <h3 style="text-align: center; color:brown">Mars Hemispheres</h3>
+                {% for hemisphere in mars.hemisphere_full_image %}
+                    <div class = "col-md-3">
+                        <div class = "card text-black" style="margin:30px;">
+                            <img class="card-img-top" src = "{{hemisphere.img_url}}">
+                                <h3>{{hemisphere.title}}</h3>
+                            </div>
+                        </div>
+                {% endfor %}
+                    </div>
+            
+            </div>
+        </div>
+        </div>
+        </div>
+      </div>
+</body>
+</html>
+

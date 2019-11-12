@@ -4,8 +4,8 @@ import pymongo
 import scrape_mars
 from splinter import Browser
 
-executable_path = {'executable_path': 'chromedriver.exe'}
-browser = Browser('chrome', **executable_path, headless=False)
+# executable_path = {'executable_path': 'chromedriver.exe'}
+# browser = Browser('chrome', **executable_path, headless=False)
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -16,15 +16,17 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    mission_mars_data= mongo.db.mission_mars_data.find_one()
+    mission_mars_data= mongo.db.collection.find_one()
     return render_template("index.html", mars = mission_mars_data)
 
 
 @app.route("/scrape")
 def scrape():
-    mission_mars_data = mongo.db.mission_mars_data
+    
     mars_data = scrape_mars.scrape()
-    mission_mars_data.update({}, mars_data, upsert=True)
+    
+    # mission_mars_data = mongo.db.mission_mars_data
+    mongo.db.collection.update({}, mars_data, upsert=True)
     return redirect("/", code=302)
 
 if __name__ == "__main__":
